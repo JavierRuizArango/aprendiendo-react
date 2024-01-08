@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+< lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=>, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<h1>Vanilla JavaScript</h1>
+<p>
+    cuando no utilizas ningun tipo de biblioteca ni dependencia para crear algo con javascritp a esto se le 
+    conoce como vanilla javascript me permite construir una interfaz de usuario sin usar alguna libreria
+    o framework de javascript a esto se le conoce como codigo imperactivo es decir le estamos diciendo el como lop
+    tiene que hacer las cosas es darle una serie de instruciones para que sepa como lo tiene que hacer ,con react
+    siembarco la cosa cambia ya no va a ser codigo imperactivo sino que ya es codigo declarativo osea le describimos lo que
+    tiene que hacer 
+</p>
+<p>
+    desventaja si quiere reutilizar mi codigo es que tengo que hacer para cada componente hacer la misma funcionalidad es 
+    decir para comportartir la logica por ejemplo de un boton para  otros botones cada boton debe de tener el codigo lo que 
+    hace que tome mucho mas tiempo y sea engorroso de utilizar y no es algo escalable a futuro el codgio imperactivo no escala bien
+
+</p>
+<h2>ejemplo codigo imperactivo</h2>
+<div>
+    <h2>ccs</h2>
+    <p>
+        <button data-id="123"="">Me gusta </button>
+                <style>
+                    button {
+                    background: #09f;
+                    color: #fff;
+                    border: 0;
+                    padding: 4px 8px;
+                    font-size: 18px;
+                    cursor: pointer;
+                        body {
+                        background: #222;
+                        }
+                        
+                            }
+                </style>
+    </p>
+    <p>
+        <h2>codigo javascript</h2>
+        
+        vanilla javascritp
+        <br>
+        recuperar el boton
+        <br>
+        const button = document.querySelector('button')
+        <br>
+        al hacer click en el boton , tiene que ejecutar una funcion button.addEventListener('click', function (){
+            alert('hola') recuperar el id dle atributo html
+            const id = button.getAttribute('data-id')
+            
+           //llamar un servicio para que se actulice si me gusta
+           //toggleLike(id)
+            
+            if (button.classList.contains('liked')) {
+                button.classList.remove('liked')
+                button.innerHTML  = 'ME gusta'
+            } else {
+                button.classList.add('liked')
+                button.innerText = 'No me gusta'
+            }
+            
+            
+            })
+    </p>
+</div>
+<h2>Codigo declarativo con react</h2>
+<div>
+    <p>
+        lo primero que se tiene que hacer es importar react ,siempre se van a crear eleemntos y estos tienen atribuyoss y propiedades 
+        tambien ponemos que es lo que envuelve el elemento ejemplo sie tengo un boton de megusta const button = React.createElement('button', null, 'Me gusta')
+        nunca se le va a a pasar una cadena de texto a react siempre se deben de crear directamente eleemntos
+        REACT  es un arbol de elementos que va a ir creando todos los componetes
+        y cada componente va a tener dentro un componete porque en react todo es un componetes
+        por eso se inicia desde la base para eso es reactDom en react no se puede renderizar directamente el texto html 
+        se debe crear de alguna forma un elemento para decirle a react lo que quieres renderizar
+
+    </p>
+    <p>
+        para crear un elemento utilicion React.createElemente y es como
+        las etiquetas de html tiene sus atributos que son tres solo que en
+        react no se van a llamar atributos sino parametros entonces el primer parametro corresponde
+        al tipo de elemento osea si es boton sera button ,luego sigue su identificar
+        por ejemplo si quisieramos capturar informacion quedaria en ese parametro el id
+        de ese botom y luego el trecer parametro seria lo que el usuario va a ver 
+        ejemplo un boton de me gusta la letra que dice me gusta seria el parametro
+        quedaria asi :
+
+        const button = React.createElemente('buttton', {"data-id": 123 },'Me gusta')
+
+        eso seria un elemento en react en este caso el elemento es un boton 
+
+        lo que hace react es renderizar elementos yo nunca voy a poder pasarle
+        una cadena de texto de tipo html esto lo hace react para evitar inyeciones de codigo
+        
+        NO PODEMOS RENDERIZAR MAS DE UN ELEMENTO A LA VEZ
+        
+        para renderizar varios elementos debo de embolverlos como asi si tengo
+        tres botones y quiero que estos se renderizen al mismo tiempo los tres 
+        simple mente lo que haria seria meter mis tres botones dentro de un
+        div de esta manera cuando se este renderizando el div tambien lo haran
+        mis tres botones por que estan dentro de ese div y asi me puedo saltar 
+        esa restricion y renderizar varios elementos simultaneamente EJEMPLO:
+        
+        tendre tres botones distintos cada uno seria un elemento diferente
+        pero los renderizare al mismo tiempo todos porque los voy a poner dentro
+        de un elemento contenedor osea un div en los parametros le voy a pasar
+        mis tres botones puestos en un array es decir en el tecer parametro meto
+        mis constantes que representan mis tres botones dentro de un array y luego
+        renderizo ese div
+        
+        const button = React.createElement('button', {"data-id": 123}, 'button 1')
+        const button1 = React.createElement('button'. {"data-id":567}, 'button 2')
+        const button2 = React.createElement('button', {"data-id":789}, 'button 3')
+        
+        const div = React.createElement('div', null , [button,button1,button2])
+        
+        root.render(div)
+        
+        Resulta pasa sucede y acontese que yo debo de evitar en lo posible crear capas y capas
+        de html por eso no es muy bueno estar renderizando un div hay que tratar de mantener
+        el codigo lo mas semantico posible para esto react tiene algo que se llama
+        React.fragment es un un componete propio de react que lo que hace es permitirme
+        envolver de manera simultanea varios elementos para poder renderizarlos
+        
+        con ese componente el anterior codigo quedaria asi :
+        
+        const button = createElement('button', {"data-id":123},'button 1')
+        const button1 = createElement('button',{"data-id":456},'button 2')
+        const button2 = createElement('button',{"data-id":789},'button 3')
+        
+        const app = React.createElemente(React.fragment, null , [button, button2, button3])
+        
+        root.render(app)
+
+        
+        no se hace un div porque obliga a tener un nival mas al html lo que 
+        se busca es dejar el html lo mas simple y semantico posible pero
+        tener un codigo como ese no esta bien es una mala practica porque
+        es muy dificil de enter a largo plazo por decirlo de alguna manera
+        este codigo es exactamente el mismo pero lo simplifica un poco mejor para 
+        poder entenderlo
+
+        import React from "https://esm.sh/react@18.2.0"
+        import ReactDom from "https://esm.sh/react-dom@18.2.0/client"
+
+        const appDomElement = document.getElementById('app')
+
+        const root = ReactDom.createRoot(appDomElement)
+
+        const h = React.createElement
+
+        const button = h('button', null, {"data-id"}, 'button')
+        const button1 = h('button', null , {"data-id"}, 'button')
+        const button2 = h('button', null , {"data-id"}, 'button')
+        
+        const app = h(React.fragment, null , [button, button2, button3])
+
+        root.render(app)
+
+
+        TODO ESTE CODIGO AUN NO ES UN CODIGO DECLARATIVO 
+       </p>
+       <H2> React declarativo</H2>
+       <p>
+        lo anterior se  hizo para poder entender un poco mas que es un codigo
+        imperactivo y un codigo declarativo, tambien que react funciona con 
+        puros componestes y elementos PARA REACT JXS  es una extensicion de 
+        emascript que es esta basada en XML se puede utilizar react sin JXS
+        como lo hice en el codigo anterior pero no seria un codigo declarativo
+        JXL es un lenguaje de javascript en donde se escribe una especifie de
+        XML es decir es una sintaxis en la que se describe la interfaz que
+        quiero crear en vez de ponerme a crear boton por boton 
+
+        DATO CURIOSO : BABEL ES UN TRASPIRADOR DE CONDIGO EN DONDE YO ESCRIBO 
+        CODIGO DE JavaScript Y EL LO TRANSFORMA LO MISMO PARA SWC SON HERRAMIENTAS
+        QUE UTILIZAN POR DEBAJO ALGUNOS EMPAQUETADORES 
+       </p>
+       <P>
+        LO QUE SE ESTE ESCRIBIENDO EN REACT CUANDO SE ESCRIBA EN JXL NO ES HTML 
+        ES JavaScript pero se escribe asi para que sea mas facil de escribir
+        y sea tambien declarativo 
+       </P>
+       <h2>Expresion en JSX</h2>
+       <P>
+        const name = 'miguel'
+        < hola, {name}>
+
+        se puden añadir expresiones poniendo la constante entre llaves
+        se puede hacer lo mismo llamando una funcion ejemplo llamando
+        un elemento
+
+        const elemento = < strong >Numero aleatorio .{Math.random} < stronng />
+
+
+        todo lo que se esta poniendo entre las llaves es porque le estoy
+        diciendo que quiero que lo evalue entre llave solo se pueden poner
+        expresiones no declaraciones no se puede poner codigo solo se pueden
+        porner cosas que devuelven un valor ,evaluar constantes y luego especificar
+        atributos es  muy parecido a como se hace en html
+       </P>
+       <p>
+        Jsx 
+        < button data-id="123" > 
+        ese codigo es un ejemplo de un codigo en jxs donde se esta creando
+        un boton y tiene un atributo de data-id recuerda javier del futuro
+        esto no es html esto es javascript como es javascritp y no html 
+        los atributos se utilizan como si fueran camelCase ejemplo:
+        
+
+        < button tabIndex="1" > }
+        ese codigo es JSX osea javascript pero mas breve tiene un atributo
+        de tipo tabindex como dice lo anterior se va a diferenciar es porque
+        esos atributos van a ir con camelCase ,Jsx tambien evita la inyeccion
+        de codigo
+       </p>
+</div>
+</html>
