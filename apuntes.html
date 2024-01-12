@@ -215,9 +215,50 @@
 
         < button tabIndex="1" > }
         ese codigo es JSX osea javascript pero mas breve tiene un atributo
-        de tipo tabindex como dice lo anterior se va a diferenciar es porque
+        de tipo tabindex como dice lo anterisssssssssssssssssssor se va a diferenciar es porque
         esos atributos van a ir con camelCase ,Jsx tambien evita la inyeccion
         de codigo
        </p>
+       <p>
+        <h2>
+            vite
+        </h2>
+        para trabajar con react utlizaremos un empaquetador de aplicaciones web la forma oficial es create React app 
+        es es la forma oficial pero que pasa ya es un poco lenta y existen otros empaquetadores que son mucho mejor 
+        existe VITE  que es lo mismo pero mejor es compatible con muchos frameworks
+        para utilizar vite : npm create vite@latest recuerda npm es el administrador de dependencias de node 
+        <ul>
+            <li>
+                paso numero 1 npm init -y se encarga de inicializar el proyecto create un packague json
+            </li>
+            <li>
+                dentro de la carpeta npm create vite@latest para inicilizar vite puede que pida instalar paquetes
+            </li>
+            <li>
+                instalo los paquetes me pide que ponga nombre del proyecto
+            </li>
+            <li>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+                seleciono el framework luego pregunta si quiero utilizar javascript o tyscritp siempre se busca utilizar
+                el lenguaje que tenga swc recuerda que es como babel un traspirador que maneja jxs 
+            </li>
+            <li>
+                npm install para intalar las dependencias
+            </li>
+            <li>
+                npm run dev para inicializar el proyecto ojo todo esto se hace dentro de la carpeta de mi proyecto
+                de lo contrario tira error
+            </li>
+        </ul>
 </div>
+<p>
+    hacer los pasos anteriores me crear automaticamente mi proyecto con react asi como tambien el archivo .gitignore 
+    crea tambien una carperta src y un index.html 
+</p>
+<p>
+    esa main es muy importante porque se abra generado o creado el punto de entrada de la aplicacion en ese archivo main que de hecho tiene
+    el icono de react se estaran importando los estilos css gracias a vite tambien se importara react que ya esta
+    previamente instalado ademas de que se importa el react dom y tambien se importa un componente de tipo app
+
+    tambien estara el ReactDom.createRoot(document.getElementById('root').render) es elemento donde queremos crear
+    nuestra aplicacion
 </html>
